@@ -1,0 +1,4 @@
+---
+
+sysstat_config_path: /etc/sysstat/sysstat
+sysstat_sa_dir: /var/log/sysstat

@@ -1,0 +1,23 @@
+---
+
+- name: include host specific variables
+  include_vars: "{{ ansible_os_family }}.yaml"
+
+- name: install sysstat
+  package:
+    name: sysstat
+    state: present
+
+- name: template sysstat config
+  template:
+    src: sysstat.j2
+    dest: "{{ sysstat_config_path }}"
+    owner: root
+    group: root
+    mode: 0600
+
+- name: enable and start sysstat service
+  service:
+    name: sysstat
+    enabled: true
+    state: started
