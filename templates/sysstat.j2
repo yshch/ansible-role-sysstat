@@ -4,10 +4,10 @@
 # Used by sa2(8) script
 # If value is greater than 28, then use sadc's option -D to prevent older
 # data files from being overwritten. See sadc(8) and sysstat(5) manual pages.
-HISTORY=21
+HISTORY={{ sysstat_history }}
 
 # Compress (using xz, gzip or bzip2) sa and sar files older than (in days):
-COMPRESSAFTER=21
+COMPRESSAFTER={{ sysstat_compress_after }}
 
 # Parameters for the system activity data collector (see sadc(8) manual page)
 # which are used for the generation of log files.
