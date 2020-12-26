@@ -1,15 +1,16 @@
 ---
 
 - name: include host specific variables
-  include_vars: "{{ ansible_os_family }}.yml"
+  ansible.builtin.include_vars:
+    file: "{{ ansible_os_family }}.yml"
 
 - name: install sysstat
-  package:
+  ansible.builtin.package:
     name: sysstat
     state: present
 
 - name: template sysstat config
-  template:
+  ansible.builtin.template:
     src: sysstat.j2
     dest: "{{ sysstat_config_path }}"
     owner: root
@@ -17,7 +18,7 @@
     mode: 0600
 
 - name: enable and start sysstat service
-  service:
+  ansible.builtin.service:
     name: sysstat
     enabled: true
     state: started
