@@ -4,12 +4,19 @@
   ansible.builtin.include_vars:
     file: "{{ ansible_os_family }}.yml"
 
-- name: install sysstat
+- name: enable sadc collection using debconf
+  ansible.builtin.debconf:
+    name: sysstat
+    question: sysstat/enable
+    vtype: boolean
+    value: 'true'
+
+- name: install package
   ansible.builtin.package:
     name: sysstat
     state: present
 
-- name: template sysstat config
+- name: template config
   ansible.builtin.template:
     src: sysstat.j2
     dest: "{{ sysstat_config_path }}"
@@ -17,7 +24,13 @@
     group: root
     mode: 0600
 
-- name: enable and start sysstat service
+- name: ensure sadc collection is enabled
+  ansible.builtin.lineinfile:
+    path: /etc/default/sysstat
+    regexp: "^ENABLED="
+    line: "ENABLED=\"true\""
+
+- name: enable and start service
   ansible.builtin.service:
     name: sysstat
     enabled: true
