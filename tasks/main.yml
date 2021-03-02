@@ -9,7 +9,7 @@
     name: sysstat
     question: sysstat/enable
     vtype: boolean
-    value: 'true'
+    value: "true"
 
 - name: install package
   ansible.builtin.package:
